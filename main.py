@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter.ttk import *
+from tkinter import filedialog as dlg
 import runner
 import xlsxwriter
 
@@ -8,11 +9,13 @@ import xlsxwriter
 App = Tk()
 App.title("Buscador")
 
+# arquivo = dlg.askopenfile(mode='r')
+
 def buscar():
     retorno = runner
     retorno.execute(f'{entradaText.get()}')
     
-    res.configure(text=f'{retorno.datareturn()}')
+    #res.configure(text=f'{retorno.datareturn()}')
     
     workbook = xlsxwriter.Workbook('Relatório.xlsx') 
     worksheet = workbook.add_worksheet("Empresas") 
@@ -26,7 +29,10 @@ def buscar():
         worksheet.write(row, col + 1, j)
         worksheet.write(row, col + 2, k)
         row += 1
+    
     workbook.close()
+
+#------------------------Interface----------------------#
 
 framePrincipal = Frame(App)
 
@@ -40,8 +46,10 @@ butPesquisar = Button(framePrincipal, text="Buscar", width='34', command=lambda:
 butPesquisar.pack(pady="5", padx="5")
 
 res = Label(framePrincipal, text="")
-res.pack(pady="5", padx="5")
+#res.pack(pady="5", padx="5")
 
 framePrincipal.pack(padx="10", pady="10")
+
+#---------------------------------------------------------#
 
 App.mainloop()
