@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 data = []
 ok = True
 
+
 class execute:
     def acao(self, codes:list):
         global data
@@ -23,11 +24,9 @@ class execute:
                 cidade = self.navegador.find_element(By.XPATH, '/html/body/table[3]/tbody/tr/td/fieldset[2]/table[2]/tbody/tr[2]/td[3]')
                 if cidade.text == 'LIMOEIRO DE ANADIA':
                     data.append([nome.text, empresa.text, cidade.text, "Local"])
-
-                else:
-                    data.append([nome.text, empresa.text, cidade.text, "Externo"])
             except:
-                data.append(["invalid-CNPJ", "invalid-CNPJ", "invalid-CNPJ", "invalid-CNPJ"])
+                pass
+                
                 
     def __init__(self, codes:list):
         global ok
@@ -45,5 +44,4 @@ class execute:
 def datareturn():
     return data
 if __name__ == "__main__":
-    execute
-
+    __ = execute
