@@ -18,13 +18,11 @@ def importar():
         nome.configure(text="Importado com sucesso!", foreground="#00aa10")
     except:
         nome.configure(text="Não foi possivel importar\nTente novamente.", foreground="#ff1010", justify=tk.CENTER)
-        App.geometry('245x140')
 
 
 # - - - Inicializar aplicativo - - - #
 App = tk.Tk()
 App.minsize(240, 130)
-App.geometry("240x130")
 style = ttk.Style("litera")
 App.title("Buscador")
 img = tk.PhotoImage(file="img/R.png")
@@ -35,18 +33,13 @@ App.iconphoto(False, img, img)
 def buscar(codigos:list):
     try:
         if codigos != []:
-            nome.configure(text="Aguarde...", foreground="#cccc10")
             retorno = runner
             if retorno.ok == True:
+                nome.configure(text="Aguarde...", foreground="#cccc10")
                 scores = []
                 retorno.execute(codigos)
                 
                 scores = retorno.data
-                #  for i in scores:                              #
-                #      res = Label(framePrincipal, text="")      #   Adiciona uma label falando se a empresa é local ou 
-                #      res.pack(pady="5", padx="5")              #   externa para cada pesquisa.
-                #      res.configure(text=f'{i[3]}')             #
-                # save var here !!!
                 save = dlg.asksaveasfilename(filetypes=[("Arquivo Excel", "*.xlsx")])
                 if save:
                     workbook = xlsxwriter.Workbook(f'{save}.xlsx')
@@ -66,10 +59,8 @@ def buscar(codigos:list):
                     nome.configure(text="Concluído!", foreground="#00aa10")
                 else:
                     nome.configure(text="Ocorreu um erro de execução, por favor\nreinicie o programa.", foreground="#ff1010", justify=tk.CENTER)
-                    App.geometry('245x140')
             else:
                 nome.configure(text="Ocorreu um erro de execução, por favor\nreinicie o programa.", foreground="#ff1010", justify=tk.CENTER)
-                App.geometry('245x140')
         else:
             nome.configure(text="Primeiro importe os CNPJs.", foreground="#ff1010", justify=tk.CENTER)
     except:
