@@ -9,9 +9,9 @@ Buscador de empresas via raíz de CNPJ
 | Cidades suportadas |       status       |
 |:------------------:|:------------------:|
 | Limoeiro de Anadia | :white_check_mark: |
-|     Taquarana      |        :x:         |
-|     Arapiraca      |        :x:         |
-| Giral do Ponciano  |        :x:         |
+|     Taquarana      | :white_check_mark: |
+|     Arapiraca      | :white_check_mark: |
+| Giral do Ponciano  | :white_check_mark: |
 
 ### Pacotes utilizados:
 ```
