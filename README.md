@@ -20,7 +20,7 @@ $ pip list
 Package                 Version
 -------------------------------
 openpyxl                3.0.10
-pandas*                 1.5.2
+pandas                  1.5.2
 selenium                4.7.2
 ttkbootstrap            1.10.0
 webdriver-manager       3.8.5

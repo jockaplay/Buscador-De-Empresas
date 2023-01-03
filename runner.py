@@ -1,5 +1,4 @@
 from selenium import webdriver
-# from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 
 data = []
@@ -29,7 +28,7 @@ class Execute:
                     if cidade.text == i:
                         data.append([nome.text, empresa.text, cidade.text, "Local"])
             except:
-                print("CNPJ inválido")
+                print("CNPJ inválido.")
 
     def __init__(self, codes: list, cidades: list):
         global ok

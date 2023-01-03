@@ -4,6 +4,7 @@ from tkinter import filedialog as dlg  # Carregar arquivo
 import pandas as pd
 import runner
 import xlsxwriter
+
 # openpyxl
 
 lista = []
@@ -32,8 +33,7 @@ def importar():
 
 # - - - Inicializar aplicativo - - - #
 App = tk.Tk()
-App.minsize(240, 270)
-App.wm_geometry("1x1+550+220")
+App.minsize(260, 290)
 style = ttk.Style("litera")
 App.title("Buscador")
 img = tk.PhotoImage(file="img/R.png")
@@ -42,7 +42,6 @@ App.iconphoto(False, img, img)
 
 # - - - - - - - - - - - - - - - - - #
 
-
 def buscar(codigos: list):
     global cidades
     try:
@@ -50,40 +49,40 @@ def buscar(codigos: list):
             nome.configure(text="Aguarde...", foreground="#cccc10")
             retorno = runner
             if retorno.ok:
-                retorno.Execute(codigos, cidades)
-                scores = retorno.data
-                save = dlg.asksaveasfilename(filetypes=[("Arquivo Excel", "*.xlsx")])
-                if save:
-                    workbook = xlsxwriter.Workbook(f'{save}.xlsx')
-                    worksheet = workbook.add_worksheet("Empresas")
-                    formatado = workbook.add_format()
-                    formatado.set_align("center")
-                    worksheet.set_column(2, 2, 25, formatado)
-                    worksheet.set_column(0, 1, 35)
-                    row = 0
-                    col = 0
-                    for pessoa, empresa, local, l in scores:
-                        worksheet.write(row, col, pessoa)
-                        worksheet.write(row, col + 1, empresa)
-                        worksheet.write(row, col + 2, local)
-                        row += 1
-                    workbook.close()
-                    nome.configure(text="Concluído!", foreground="#00aa10")
+                if cidades:
+                    retorno.Execute(codigos, cidades)
+                    scores = retorno.data
+                    save = dlg.asksaveasfilename(filetypes=[("Arquivo Excel", "*.xlsx")])
+                    if save:
+                        workbook = xlsxwriter.Workbook(f'{save}.xlsx')
+                        worksheet = workbook.add_worksheet("Empresas")
+                        formatado = workbook.add_format()
+                        formatado.set_align("center")
+                        worksheet.set_column(2, 2, 25, formatado)
+                        worksheet.set_column(0, 1, 35)
+                        row = 0
+                        col = 0
+                        for pessoa, empresa, local, l in scores:
+                            worksheet.write(row, col, pessoa)
+                            worksheet.write(row, col + 1, empresa)
+                            worksheet.write(row, col + 2, local)
+                            row += 1
+                        workbook.close()
+                        nome.configure(text="Concluído!", foreground="#00aa10")
+                    else:
+                        nome.configure(text="O arquivo não foi salvo.",
+                                       foreground="#ff1010", justify=tk.LEFT)
                 else:
-                    nome.configure(text="Ocorreu um erro de execução, por favor\nreinicie o programa.",
+                    nome.configure(text="Selecione pelo menos uma cidade.",
                                    foreground="#ff1010", justify=tk.LEFT)
-                    print("Arquivo não salvo")
             else:
                 nome.configure(text="Ocorreu um erro de execução, por favor\nreinicie o programa.",
                                foreground="#ff1010", justify=tk.LEFT)
-                print("Não foi possível realizar as operações")
         else:
             nome.configure(text="Primeiro importe os CNPJs.", foreground="#ff1010", justify=tk.LEFT)
-            print("else numero 2")
     except:
         nome.configure(text="Não foi encontrado nenhuma empresa\nnos locais selecionados", foreground="#ff1010",
                        justify=tk.LEFT)
-        print("Deu ruim")
 
 
 # ------------------------Interface----------------------#
@@ -92,23 +91,30 @@ framePrincipal = tk.Frame(App)
 
 frameSide = tk.Frame(framePrincipal)
 
-ttk.Label(frameSide, text="Cidades").pack(padx="3", expand=1, fill="x")
+ttk.Label(frameSide, text="Cidades").pack(padx="3", pady=(0, 10), expand=1, fill="x")
 # Select City
 limoeiro = ttk.Checkbutton(frameSide, text="Limoeiro de Anadia", command=lambda: marcar(limoeiro, "LIMOEIRO DE ANADIA"))
-limoeiro.pack(pady=5, padx=5, fill="both")
+limoeiro.pack(pady=(0, 10), padx=5, fill="both")
 limoeiro.invoke()
 limoeiro.invoke()
 giral = ttk.Checkbutton(frameSide, text="Giral do Ponciano", command=lambda: marcar(giral, "GIRAL DO PONCIANO"))
 giral.pack(pady=(0, 10), padx=5, fill="both")
 giral.invoke()
 giral.invoke()
+taquarana = ttk.Checkbutton(frameSide, text="Taquarana", command=lambda: marcar(taquarana, "TAQUARANA"))
+taquarana.pack(pady=(0, 10), padx=5, fill="both")
+taquarana.invoke()
+taquarana.invoke()
+arapiraca = ttk.Checkbutton(frameSide, text="Arapiraca", command=lambda: marcar(arapiraca, "ARAPIRACA"))
+arapiraca.pack(padx=5, fill="both")
+arapiraca.invoke()
+arapiraca.invoke()
 # Select City
 ttk.Separator(frameSide).pack(pady=(5, 0), expand=1, fill="x")
 
 frameSide.pack(side="top", expand=1, fill="x")
 
-label = ttk.Label(framePrincipal, text="Status")
-label.pack(pady=(5, 0), padx="3", expand=1, fill="x")
+ttk.Label(framePrincipal, text="Status:").pack(pady=(5, 0))
 nome = ttk.Label(framePrincipal, text="Importar Arquivo")
 nome.pack(pady="5", padx="5", expand=1, fill="both")
 
