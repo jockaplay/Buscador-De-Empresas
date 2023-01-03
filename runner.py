@@ -6,13 +6,14 @@ ok = True
 
 
 class Execute:
-    def acao(self, codes: list, cidades: list):
+    def acao(self, codes: list, cidades: list, tipo: int):
         global data
         for text in codes:
             self.navegador.get('http://cadsinc.sefaz.al.gov.br/ConsultarDadosContribuinte.do?action'
                                '=VisualizarDadosContribuinte.do')
-            self.navegador.find_element(By.XPATH, '//*[@id="idTipoDocumento"]').click()
-            self.navegador.find_element(By.XPATH, '/html/body/form/table/tbody/tr[1]/td[1]/select/option[4]').click()
+            if tipo:
+                self.navegador.find_element(By.XPATH, '//*[@id="idTipoDocumento"]').click()
+                self.navegador.find_element(By.XPATH, '/html/body/form/table/tbody/tr[1]/td[1]/select/option[4]').click()
             element = self.navegador.find_element(By.XPATH, '//*[@id="valor"]')
             element.send_keys(f'{text}')
             try:
@@ -30,21 +31,25 @@ class Execute:
             except:
                 print("CNPJ inválido.")
 
-    def __init__(self, codes: list, cidades: list):
+    def __init__(self, codes: list, cidades: list, brows: int, tipo: int):
         global ok
         ok = True
         try:
-            self.navegador = webdriver.Firefox()
+            if brows == 0:
+                self.navegador = webdriver.Firefox()
+            else:
+                self.navegador = webdriver.Chrome()
             self.navegador.minimize_window()
-            self.acao(codes, cidades)
+            self.acao(codes, cidades, tipo)
             self.navegador.close()
-        finally:
+        except:
             ok = False
             return
 
 
-def datareturn():
-    return data
+def wipedata():
+    global data
+    data = []
 
 
 if __name__ == "__main__":

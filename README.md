@@ -29,6 +29,7 @@ XlsxWriter              3.0.4
 
 ### Como usar
 
+- Antes de tudo, selecione as cidades que deseja buscar.
 - Ao clicar em importar, selecione um arquivo no formato xlsx contendo, na primeira coluna, a raíz do CNPJ das empresas que deseja procurar
 - Logo após, pressione o botão buscar para que o programa comece a fazer o processo, que pode ser observado no navegador que será aberto pelo programa
 - Quando o programa finalizar, abrirá uma janela de exportação para escolher onde e o nome que vai ser salvo o arquivo gerado.
