@@ -1,5 +1,5 @@
 # selettoBuscador
-Buscador de empresas via raíz de CNPJ
+Buscador de empresas via raíz de CNPJ ou CACEAL
 
 - [x] Retorna o nome da empresa e local
 - [x] Mais de uma empresa por vez
