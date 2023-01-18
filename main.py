@@ -1,4 +1,6 @@
+from pathlib import Path
 import tkinter as tk
+from tkinter import font
 import ttkbootstrap as ttk
 from tkinter import filedialog as dlg  # Carregar arquivo
 import pandas as pd
@@ -45,10 +47,12 @@ def saveFile(alinhamento, scores):
 
 def verificar(a):
     global item
-    if a == "CACEAL":
-        item = 1
-    elif a == "Raiz do CNPJ":
+    if a == "Raiz do CNPJ":
         item = 0
+    elif a == "CACEAL":
+        item = 1
+    elif a == "CNPJ":
+        item = 2
 
 
 def marcar(mark, city: str):
@@ -90,9 +94,9 @@ def processo(codigos, alinhamento):
 
 App = tk.Tk()
 App.minsize(260, 290)
-style = ttk.Style("litera")
+style = ttk.Style("litera") 
 App.title("Buscador")
-img = tk.PhotoImage(file="img/R.png")
+img = tk.PhotoImage(file=Path(".\img\R.png"))
 App.iconphoto(False, img, img)
 
 
@@ -115,10 +119,10 @@ def buscar(codigos: list):
 # ------------------------Interface----------------------#
 
 
-listaOpt = ["Raiz do CNPJ", "Raiz do CNPJ", "CACEAL"]
+listaOpt = ["Raiz do CNPJ", "Raiz do CNPJ", "CACEAL", "CNPJ"]
 value_inside = tk.StringVar(App)
 framePrincipal = tk.Frame(App)
-optbut = ttk.OptionMenu(App, value_inside, *listaOpt, style="success", command=verificar)
+optbut = ttk.OptionMenu(App, value_inside, *listaOpt, style="success", command=verificar, direction="below")
 verificar(optbut)
 optbut.pack(fill="x")
 
@@ -173,6 +177,8 @@ entradaCod.pack(pady="5", padx="5")
 butPesquisar = ttk.Button(framePrincipal, text="Buscar", width=34, command=lambda: buscar(lista),
                           style="success-outline")
 butPesquisar.pack(pady="5", padx="5")
+
+version = ttk.Label(framePrincipal, text="v1.2", foreground="#999", font=font.Font(size=8)).pack()
 
 framePrincipal.pack(padx="10", pady="10", expand=1, fill="both")
 
