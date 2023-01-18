@@ -1,4 +1,3 @@
-from pathlib import Path
 import tkinter as tk
 from tkinter import font
 import ttkbootstrap as ttk
@@ -96,8 +95,6 @@ App = tk.Tk()
 App.minsize(260, 290)
 style = ttk.Style("litera") 
 App.title("Buscador")
-img = tk.PhotoImage(file=Path(".\img\R.png"))
-App.iconphoto(False, img, img)
 
 
 # - - - - - - - - - - - - - - - - - #
