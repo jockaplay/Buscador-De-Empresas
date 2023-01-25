@@ -89,7 +89,7 @@ class Execute:
         nome, rasaosocial, local, contato1 = "Nome", "Razão social", "Cidade", "Email"
         try:
             self.navegador.get(
-                f'https://cadsinc.sefaz.al.gov.br/VisualizarDadosContribuinte.do?opcao=cnpj&valor={str(text).zfill(14)}')
+                f'https://cadsinc.sefaz.al.gov.br/VisualizarDadosContribuinte.do?opcao=cnpj&valor={str(text).replace(".0", "").zfill(14)}')
             self.navegador.find_element(By.XPATH, '/html/body/div[2]/table/tbody/tr/td[6]/a').click()
             try:
                 nome = self.navegador.find_element(By.XPATH,

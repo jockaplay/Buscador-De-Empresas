@@ -32,11 +32,11 @@ def saveFile(alinhamento, scores):
         row = 0
         col = 0
         for pessoa, empresa, local, email, text in scores:
-            worksheet.write(row, col, pessoa)
-            worksheet.write(row, col + 1, empresa)
-            worksheet.write(row, col + 2, local)
-            worksheet.write(row, col + 3, email)
-            worksheet.write(row, col + 4, text)
+            worksheet.write(row, col, text)
+            worksheet.write(row, col + 1, pessoa)
+            worksheet.write(row, col + 2, empresa)
+            worksheet.write(row, col + 3, local)
+            worksheet.write(row, col + 4, email)
             row += 1
         workbook.close()
         nome.configure(text="Concluído!", foreground="#00aa10", justify=alinhamento)
@@ -175,7 +175,7 @@ butPesquisar = ttk.Button(framePrincipal, text="Buscar", width=34, command=lambd
                           style="success-outline")
 butPesquisar.pack(pady="5", padx="5")
 
-version = ttk.Label(framePrincipal, text="v1.2", foreground="#999", font=font.Font(size=8)).pack()
+version = ttk.Label(framePrincipal, text="v1.3", foreground="#999", font=font.Font(size=8)).pack()
 
 framePrincipal.pack(padx="10", pady="10", expand=1, fill="both")
 

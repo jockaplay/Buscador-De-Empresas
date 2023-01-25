@@ -27,6 +27,11 @@ webdriver-manager       3.8.5
 XlsxWriter              3.0.4
 ```
 
+Run the command:
+```
+pip install openpyxl pandas selenium ttkbootstrap webdriver-manager XlsxWriter
+```
+
 ### Como usar
 
 - Antes de tudo, selecione as cidades que deseja buscar.
